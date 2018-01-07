@@ -20,6 +20,8 @@
 		"node": ">=6"
 	},
 	"dependencies": {
+		"hifo": "^0.7.0",
+		"leven": "^2.1.0"
 	},
 	"devDependencies": {
 		"lodash.sortby": "^4.7.0",
