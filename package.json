@@ -1,0 +1,32 @@
+{
+	"name": "synchronous-autocomplete",
+	"description": "Fast, simple autocompletion.",
+	"version": "0.1.0",
+	"main": "index.js",
+	"files": [
+		"index.js"
+	],
+	"keywords": [
+		"autocomplete",
+		"autocompletion",
+		"search"
+	],
+	"author": "Jannis R <mail@jannisr.de>",
+	"homepage": "https://github.com/derhuerst/synchronous-autocomplete",
+	"repository": "derhuerst/synchronous-autocomplete",
+	"bugs": "https://github.com/derhuerst/synchronous-autocomplete/issues",
+	"license": "ISC",
+	"engines": {
+		"node": ">=6"
+	},
+	"dependencies": {
+	},
+	"devDependencies": {
+		"tap-min": "^1.2.2",
+		"tape": "^4.8.0"
+	},
+	"scripts": {
+		"test": "node test.js | tap-min",
+		"prepublishOnly": "npm test"
+	}
+}
