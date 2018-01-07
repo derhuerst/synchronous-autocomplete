@@ -22,6 +22,8 @@
 	"dependencies": {
 	},
 	"devDependencies": {
+		"lodash.sortby": "^4.7.0",
+		"normalize-for-search": "^2.0.1",
 		"tap-min": "^1.2.2",
 		"tape": "^4.8.0"
 	},
