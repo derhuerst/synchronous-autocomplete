@@ -2,6 +2,7 @@
 
 const normalize = require('normalize-for-search')
 
+const buildIndexes = require('./build')
 const create = require('.')
 
 const tokenize = str => normalize(str).replace(/[^\w\s]/g, '').split(/\s+/g)
@@ -20,26 +21,7 @@ const items = [ {
 	weight: 5
 } ]
 
-const tokens = Object.create(null)
-const weights = Object.create(null)
-const nrOfTokens = Object.create(null)
-
-for (let item of items) {
-	const tokensOfItem = tokenize(item.name)
-	for (let token of tokensOfItem) {
-		if (!Array.isArray(tokens[token])) tokens[token] = []
-		tokens[token].push(item.id)
-	}
-
-	weights[item.id] = item.weight
-	nrOfTokens[item.id] = tokensOfItem.length
-}
-
-const scores = Object.create(null)
-for (let token in tokens) {
-	const nrOfItemsForToken = tokens[token].length
-	scores[token] = nrOfItemsForToken / items.length
-}
+const {tokens, scores, weights, nrOfTokens} = buildIndexes(tokenize, items)
 
 // console.error(tokens)
 // console.error(weights)

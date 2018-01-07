@@ -75,6 +75,8 @@ const scores = {
 }
 ```
 
+See [the example code](example.js) for more details on how to build them.
+
 Now, we can query our index:
 
 ```js
