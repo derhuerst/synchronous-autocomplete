@@ -45,9 +45,8 @@ const createAutocomplete = (tokens, scores, weights, nrOfTokens, tokenize) => {
 
 	const autocomplete = (query, limit = 6, fuzzy = false, completion = true) => {
 		if (query === '') return []
-		const relevant = hifo(hifo.highest('score'), limit || 6)
 
-		const data = {}
+		const data = Object.create(null)
 		for (let fragment of tokenize(query)) {
 			data[fragment] = byFragment(fragment, completion, fuzzy)
 		}
@@ -74,6 +73,7 @@ const createAutocomplete = (tokens, scores, weights, nrOfTokens, tokenize) => {
 			}
 		}
 
+		const relevant = hifo(hifo.highest('score'), limit || 6)
 		for (let id in results) relevant.add(results[id])
 		return relevant.data
 	}

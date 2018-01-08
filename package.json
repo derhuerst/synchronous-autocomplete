@@ -5,7 +5,8 @@
 	"main": "index.js",
 	"files": [
 		"index.js",
-		"build.js"
+		"build.js",
+		"src"
 	],
 	"keywords": [
 		"autocomplete",
@@ -25,13 +26,16 @@
 		"leven": "^2.1.0"
 	},
 	"devDependencies": {
+		"babel-cli": "^6.26.0",
+		"babel-preset-env": "^1.6.1",
 		"lodash.sortby": "^4.7.0",
 		"normalize-for-search": "^2.0.1",
 		"tap-min": "^1.2.2",
 		"tape": "^4.8.0"
 	},
 	"scripts": {
+		"build": "babel src --presets env --out-dir .",
 		"test": "node test.js | tap-min",
-		"prepublishOnly": "npm test"
+		"prepublishOnly": "npm run build && npm test"
 	}
 }
