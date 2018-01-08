@@ -69,7 +69,7 @@ const createAutocomplete = (tokens, scores, weights, nrOfTokens, tokenize) => {
 				if (relevance === false) continue
 
 				const score = relevance * Math.pow(weights[id], 1/3)
-				results[id] = {id, relevance, score}
+				results[id] = {id, relevance, score, weight: weights[id]}
 			}
 		}
 
