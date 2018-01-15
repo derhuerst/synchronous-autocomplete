@@ -29,7 +29,7 @@ const items = [ {
 	name: 'Sweet juicy Banana!',
 	weight: 2
 }, {
-	id: 'pomegranate',
+	id: 'pome',
 	name: 'Sour Pomegranate',
 	weight: 5
 } ]
@@ -44,34 +44,34 @@ Let's understand the terminology used by this tool:
 - *relevance*: How well an item is matched by the search query.
 - *score*: A combination of an item's *weight* and *relevance*. Use it to sort search results.
 
-In order to be as fast an disk-space-efficient as possible, `synchronous-autocomplete` requires four indexes to be prebuilt from the list of items. They look like this for our example:
+In order to be as fast and disk-space-efficient as possible, `synchronous-autocomplete` requires four indexes to be prebuilt from the list of items. For our example, they would look like this:
 
 ```js
-const tokens = {
+const tokens = { // item IDs, by token
 	juicy: ['apple', 'banana'],
 	sour: ['apple', 'pomegranate'],
 	apple: ['apple'],
 	sweet: ['banana'],
 	banana: ['banana'],
-	pomegranate: ['pomegranate']
+	pomegranate: ['pome']
 }
-const weights = {
+const weights = { // item weights, by item ID
 	apple: 3,
 	banana: 2,
-	pomegranate: 5
+	pome: 5
 }
-const nrOfTokens = {
+const nrOfTokens = { // nr of tokens, by item ID
 	apple: 3,
 	banana: 3,
-	pomegranate: 2
+	pome: 2
 }
-const scores = {
-	juicy: 2 / 3, // 2 out of 3 items
-	sour: 2 / 3, // 2 out of 3 items
-	apple: 1 / 3, // 1 out of 3 items
-	sweet: 1 / 3, // 1 out of 3 items
-	banana: 1 / 3, // 1 out of 3 items
-	pomegranate: 1 / 3 // 1 out of 3 items
+const scores = { // "uniqueness" of each token, by token
+	juicy: 2 / 3, // 2 out of 3 items have the token "juicy"
+	sour: 2 / 3,
+	apple: 1 / 3,
+	sweet: 1 / 3,
+	banana: 1 / 3,
+	pomegranate: 1 / 3
 }
 ```
 
