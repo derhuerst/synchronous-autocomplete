@@ -8,32 +8,24 @@ const sortBy = require('lodash.sortby')
 const create = require('.')
 
 const tokens = { // items by token
-	one: ['A'],
-	two: ['B'],
-	three: ['B'],
-	four: ['A', 'B']
+	one: [0],
+	two: [1],
+	three: [1],
+	four: [0, 1]
 }
-
 const scores = {
 	one: 1 / 2,
 	two: 1 / 2,
 	three: 1 / 2,
 	four: 1
 }
-
-const weights = {
-	A: 10,
-	B: 20
-}
-
-const nrOfTokens = {
-	A: 2, // one, four
-	B: 3 // two, three, four
-}
+const weights = [10, 20]
+const nrOfTokens = [2, 3]
+const originalIds = ['A', 'B']
 
 const tokenize = str => normalize(str).split(/\s+/g)
 
-const autocomplete = create(tokens, scores, weights, nrOfTokens, tokenize)
+const autocomplete = create(tokens, scores, weights, nrOfTokens, originalIds, tokenize)
 
 test('byFragment finds an exact match', (t) => {
 	t.plan(1)
@@ -41,8 +33,8 @@ test('byFragment finds an exact match', (t) => {
 
 	t.deepEqual(results, {
 		// 1 + scores[fragment] + Math.sqrt(fragment.length)
-		A: 1 + scores.four + 2,
-		B: 1 + scores.four + 2
+		'0': 1 + scores.four + 2,
+		'1': 1 + scores.four + 2
 	})
 })
 
@@ -51,8 +43,8 @@ test('byFragment finds a match by first letters', (t) => {
 
 	t.deepEqual(autocomplete.byFragment('fou', true, false), {
 		// 1 + scores[fragment] + fragmentLength / tokenLength
-		A: 1 + scores.four + 3 / 4,
-		B: 1 + scores.four + 3 / 4
+		'0': 1 + scores.four + 3 / 4,
+		'1': 1 + scores.four + 3 / 4
 	})
 	t.deepEqual(autocomplete.byFragment('fou', false, false), {})
 })
@@ -63,7 +55,7 @@ test('byFragment finds a match despite typos', (t) => {
 
 	t.deepEqual(results, {
 		// (1 + scores[fragment]) / (1 + levenshteinDistance)
-		B: (1 + scores.three) / (1 + leven('there', 'three'))
+		'1': (1 + scores.three) / (1 + leven('there', 'three'))
 	})
 })
 

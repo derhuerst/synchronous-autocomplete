@@ -3,7 +3,7 @@
 const hifo = require('hifo')
 const leven = require('leven')
 
-const createAutocomplete = (tokens, scores, weights, nrOfTokens, tokenize) => {
+const createAutocomplete = (tokens, scores, weights, nrOfTokens, originalIds, tokenize) => {
 	const byFragment = (fragment, completion, fuzzy) => {
 		const results = {}
 		const l = fragment.length
@@ -69,7 +69,12 @@ const createAutocomplete = (tokens, scores, weights, nrOfTokens, tokenize) => {
 				if (relevance === false) continue
 
 				const score = relevance * Math.pow(weights[id], 1/3)
-				results[id] = {id, relevance, score, weight: weights[id]}
+				results[id] = {
+					id: originalIds[id],
+					relevance,
+					score,
+					weight: weights[id]
+				}
 			}
 		}
 
