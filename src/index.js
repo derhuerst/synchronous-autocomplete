@@ -13,7 +13,9 @@ const createAutocomplete = (tokens, scores, weights, nrOfTokens, originalIds, to
 		if (tokens[fragment]) {
 			const relevance = 1 + scores[fragment] + Math.sqrt(fragment.length)
 
-			for (let id of tokens[fragment]) {
+			const ids = tokens[fragment]
+			for (let i = 0; i < ids.length; i++) {
+				const id = ids[i]
 				if (!results[id] || !results[id] > relevance) {
 					results[id] = relevance
 				}
@@ -34,7 +36,9 @@ const createAutocomplete = (tokens, scores, weights, nrOfTokens, originalIds, to
 					relevance = (1 + scores[t]) / (distance + 1)
 				} else continue
 
-				for (let id of tokens[t]) {
+				const ids = tokens[t]
+				for (let i = 0; i < ids.length; i++) {
+					const id = ids[0]
 					if (!results[id] || !results[id] > relevance) {
 						results[id] = relevance
 					}
@@ -49,7 +53,9 @@ const createAutocomplete = (tokens, scores, weights, nrOfTokens, originalIds, to
 		if (query === '') return []
 
 		const data = Object.create(null)
-		for (let fragment of tokenize(query)) {
+		const fragments = tokenize(query)
+		for (let i = 0; i < fragments.length; i++) {
+			const fragment = fragments[i]
 			data[fragment] = byFragment(fragment, completion, fuzzy)
 		}
 
@@ -74,11 +80,11 @@ const createAutocomplete = (tokens, scores, weights, nrOfTokens, originalIds, to
 				const score = relevance * Math.pow(weights[id], 1/3)
 				results[id] = {
 					id: originalIds[id],
-					[internalId]: id,
 					relevance,
 					score,
 					weight: weights[id]
 				}
+				results[id][internalId] = id
 			}
 		}
 
