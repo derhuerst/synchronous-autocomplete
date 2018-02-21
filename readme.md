@@ -6,6 +6,7 @@
 [![build status](https://api.travis-ci.org/derhuerst/synchronous-autocomplete.svg?branch=master)](https://travis-ci.org/derhuerst/synchronous-autocomplete)
 ![ISC-licensed](https://img.shields.io/github/license/derhuerst/synchronous-autocomplete.svg)
 [![chat on gitter](https://badges.gitter.im/derhuerst.svg)](https://gitter.im/derhuerst)
+[![support me on Patreon](https://img.shields.io/badge/support%20me-on%20patreon-fa7664.svg)](https://patreon.com/derhuerst)
 
 
 ## Installing
@@ -40,7 +41,7 @@ Let's understand the terminology used by this tool:
 - *item*: A thing to search for. In our example, apple, banana and pomegranate are tree *items*.
 - *weight*: How important an *item* is.
 - *token*: A word from the fully processed search query. For example, to find an item named `Hey There!`, you may process its name into the *tokens* `hey` & `there`.
-- *fragment*: A word from the process search query, which may partially match a token. E.g. the *fragment* `ther` (from the search query `Hey There!`) partially matches the *token* `there`.
+- *fragment*: A word from the process search query, which may partially match a token. E.g. the *fragment* `ther` (from the search query `Hey Ther`) partially matches the *token* `there`.
 - *relevance*: How well an item is matched by the search query.
 - *score*: A combination of an item's *weight* and *relevance*. Use it to sort search results.
 
