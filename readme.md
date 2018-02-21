@@ -44,27 +44,27 @@ Let's understand the terminology used by this tool:
 - *relevance*: How well an item is matched by the search query.
 - *score*: A combination of an item's *weight* and *relevance*. Use it to sort search results.
 
-In order to be as fast and disk-space-efficient as possible, `synchronous-autocomplete` requires four indexes to be prebuilt from the list of items. For our example, they would look like this:
+In order to be as fast and disk-space-efficient as possible, `synchronous-autocomplete` requires five indexes to be prebuilt from the list of items. For our example, they would look like this:
 
 ```js
-const tokens = { // item IDs, by token
-	juicy: ['apple', 'banana'],
-	sour: ['apple', 'pomegranate'],
-	apple: ['apple'],
-	sweet: ['banana'],
-	banana: ['banana'],
-	pomegranate: ['pome']
+const tokens = { // internal item IDs, by token
+	juicy: [0, 1],
+	sour: [0, 3],
+	apple: [0],
+	sweet: [1],
+	banana: [1],
+	pomegranate: [3]
 }
-const weights = { // item weights, by item ID
-	apple: 3,
-	banana: 2,
-	pome: 5
-}
-const nrOfTokens = { // nr of tokens, by item ID
-	apple: 3,
-	banana: 3,
-	pome: 2
-}
+const weights = [ // item weights, by internal item ID
+	3, // apple
+	2, // banana
+	5 // pome
+]
+const nrOfTokens = [ // nr of tokens, by internal item ID
+	3, // apple
+	3, // banana
+	2 // pome
+]
 const scores = { // "uniqueness" of each token, by token
 	juicy: 2 / 3, // 2 out of 3 items have the token "juicy"
 	sour: 2 / 3,
@@ -73,6 +73,13 @@ const scores = { // "uniqueness" of each token, by token
 	banana: 1 / 3,
 	pomegranate: 1 / 3
 }
+// In order to create smaller search indexes, we use numerical item IDs
+// internally and maintain a mapping to their "real"/original IDs.
+const originalIds = [
+	'apple',
+	'banana',
+	'pome'
+]
 ```
 
 See [the example code](example.js) for more details on how to build them.
@@ -110,14 +117,15 @@ autocomplete('aplle', 3, true) // note the typo
 ## API
 
 ```js
-const autocomplete = create(tokens, scores, weights, nrOfTokens, tokenize)
+const autocomplete = create(tokens, scores, weights, nrOfTokens, originalIds, tokenize)
 autocomplete(query, limit = 6, fuzzy = false, completion = true)
 ```
 
-`tokens` must be an object with an array of *item* IDs per *token*.
+`tokens` must be an object with an array of internal *item* IDs per *token*.
 `scores` must be an object with a *token* score per *token*.
-`weights` must be an object with an *item* weight per *item* ID.
-`nrOfTokens` must be an object with the number of *tokens* per *item* ID.
+`weights` must be an array with an *item* weight per internal *item* ID.
+`nrOfTokens` must be an array with the number of *tokens* per internal *item* ID.
+`originalIds` must be an array with the (real) *item* ID per internal *item* ID.
 `tokenize` must be a function that, given a search query, returns an array of *fragments*.
 
 

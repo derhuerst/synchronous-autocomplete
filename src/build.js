@@ -1,15 +1,14 @@
 'use strict'
 
 const buildIndexes = (tokenize, items) => {
-	const originalIds = Object.create(null)
+	const originalIds = []
 	const tokens = Object.create(null)
-	const weights = Object.create(null)
-	const nrOfTokens = Object.create(null)
+	const weights = []
+	const nrOfTokens = []
 
 	let currentId = 0
-	const generateId = (type, oldId) => {
-		currentId++
-		const newId = currentId.toString(36)
+	const generateId = (oldId) => {
+		const newId = currentId++
 		originalIds[newId] = oldId
 		return newId
 	}

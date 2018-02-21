@@ -2,7 +2,7 @@
 
 const normalize = require('normalize-for-search')
 
-const buildIndexes = require('./build')
+const build = require('./build')
 const create = require('.')
 
 const tokenize = str => normalize(str).replace(/[^\w\s]/g, '').split(/\s+/g)
@@ -21,14 +21,9 @@ const items = [ {
 	weight: 5
 } ]
 
-const {tokens, scores, weights, nrOfTokens} = buildIndexes(tokenize, items)
+const {tokens, scores, weights, nrOfTokens, originalIds} = build(tokenize, items)
 
-// console.error(tokens)
-// console.error(weights)
-// console.error(nrOfTokens)
-// console.error(scores)
-
-const autocomplete = create(tokens, scores, weights, nrOfTokens, tokenize)
+const autocomplete = create(tokens, scores, weights, nrOfTokens, originalIds, tokenize)
 console.log(autocomplete('bana'))
 console.log(autocomplete('sour'))
 console.log(autocomplete('aplle', 3, true)) // note the typo
