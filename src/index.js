@@ -38,7 +38,7 @@ const createAutocomplete = (tokens, scores, weights, nrOfTokens, originalIds, to
 
 				const ids = tokens[t]
 				for (let i = 0; i < ids.length; i++) {
-					const id = ids[0]
+					const id = ids[i]
 					if (!results[id] || !results[id] > relevance) {
 						results[id] = relevance
 					}
