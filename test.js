@@ -104,11 +104,16 @@ test('autocomplete limits the number of results', (t) => {
 })
 
 test('autocomplete exposes the internal ID', (t) => {
-	t.plan(4)
-	const results = autocomplete('fou', 3, false, true)
+	t.plan(6)
+	const [r0, r1] = autocomplete('fou', 3, false, true)
 
-	t.equal(results[0].id, 'A')
-	t.equal(results[0][autocomplete.internalId], 0)
-	t.equal(results[1].id, 'B')
-	t.equal(results[1][autocomplete.internalId], 1)
+	t.equal(r0.id, 'A')
+	t.equal(r0[autocomplete.internalId], 0)
+	const desc0 = Object.getOwnPropertyDescriptor(r0, autocomplete.internalId)
+	t.equal(desc0.enumerable, false)
+
+	t.equal(r1.id, 'B')
+	t.equal(r1[autocomplete.internalId], 1)
+	const desc1 = Object.getOwnPropertyDescriptor(r1, autocomplete.internalId)
+	t.equal(desc1.enumerable, false)
 })

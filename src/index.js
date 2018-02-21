@@ -84,7 +84,7 @@ const createAutocomplete = (tokens, scores, weights, nrOfTokens, originalIds, to
 					score,
 					weight: weights[id]
 				}
-				results[id][internalId] = id
+				Object.defineProperty(results[id], internalId, {value: id})
 			}
 		}
 
