@@ -1,5 +1,7 @@
 'use strict'
 
+const roundTo = (v, p) => parseFloat(v.toFixed(p))
+
 const buildIndexes = (tokenize, items) => {
 	const originalIds = []
 	const tokens = Object.create(null)
@@ -28,7 +30,8 @@ const buildIndexes = (tokenize, items) => {
 	const scores = Object.create(null)
 	for (let token in tokens) {
 		const nrOfItemsForToken = tokens[token].length
-		scores[token] = nrOfItemsForToken / items.length
+		const score = nrOfItemsForToken / items.length
+		scores[token] = roundTo(score, 6 - Math.log10(score) | 0)
 	}
 
 	return {tokens, scores, weights, nrOfTokens, originalIds}
