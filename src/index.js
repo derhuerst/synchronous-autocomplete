@@ -3,6 +3,8 @@
 const hifo = require('hifo')
 const leven = require('leven')
 
+const internalId = Symbol('internal numeric ID')
+
 const createAutocomplete = (tokens, scores, weights, nrOfTokens, originalIds, tokenize) => {
 	const byFragment = (fragment, completion, fuzzy) => {
 		const results = {}
@@ -68,9 +70,11 @@ const createAutocomplete = (tokens, scores, weights, nrOfTokens, originalIds, to
 				const relevance = totalRelevance(id)
 				if (relevance === false) continue
 
+				id = parseInt(id)
 				const score = relevance * Math.pow(weights[id], 1/3)
 				results[id] = {
 					id: originalIds[id],
+					[internalId]: id,
 					relevance,
 					score,
 					weight: weights[id]
@@ -84,6 +88,7 @@ const createAutocomplete = (tokens, scores, weights, nrOfTokens, originalIds, to
 	}
 
 	autocomplete.byFragment = byFragment
+	autocomplete.internalId = internalId
 	return autocomplete
 }
 

@@ -102,3 +102,13 @@ test('autocomplete limits the number of results', (t) => {
 	t.plan(1)
 	t.equal(autocomplete('four', 1).length, 1)
 })
+
+test('autocomplete exposes the internal ID', (t) => {
+	t.plan(4)
+	const results = autocomplete('fou', 3, false, true)
+
+	t.equal(results[0].id, 'A')
+	t.equal(results[0][autocomplete.internalId], 0)
+	t.equal(results[1].id, 'B')
+	t.equal(results[1][autocomplete.internalId], 1)
+})

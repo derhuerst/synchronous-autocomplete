@@ -45,7 +45,7 @@ Let's understand the terminology used by this tool:
 - *relevance*: How well an item is matched by the search query.
 - *score*: A combination of an item's *weight* and *relevance*. Use it to sort search results.
 
-In order to be as fast and disk-space-efficient as possible, `synchronous-autocomplete` requires five indexes to be prebuilt from the list of items. For our example, they would look like this:
+In order to be as fast and disk-space-efficient as possible, `synchronous-autocomplete` requires five indexes to be prebuilt from the list of items. Check [the example code](example.js) for more details on how to build them. For our example, they would look like this:
 
 ```js
 const tokens = { // internal item IDs, by token
@@ -82,8 +82,6 @@ const originalIds = [
 	'pome'
 ]
 ```
-
-See [the example code](example.js) for more details on how to build them.
 
 Now, we can query our index:
 
