@@ -120,12 +120,12 @@ const autocomplete = create(tokens, scores, weights, nrOfTokens, originalIds, to
 autocomplete(query, limit = 6, fuzzy = false, completion = true)
 ```
 
-`tokens` must be an object with an array of internal *item* IDs per *token*.
-`scores` must be an object with a *token* score per *token*.
-`weights` must be an array with an *item* weight per internal *item* ID.
-`nrOfTokens` must be an array with the number of *tokens* per internal *item* ID.
-`originalIds` must be an array with the (real) *item* ID per internal *item* ID.
-`tokenize` must be a function that, given a search query, returns an array of *fragments*.
+- `tokens` must be an object with an array of internal *item* IDs per *token*.
+- `scores` must be an object with a *token* score per *token*.
+- `weights` must be an array with an *item* weight per internal *item* ID.
+- `nrOfTokens` must be an array with the number of *tokens* per internal *item* ID.
+- `originalIds` must be an array with the (real) *item* ID per internal *item* ID.
+- `tokenize` must be a function that, given a search query, returns an array of *fragments*.
 
 
 ## Contributing
