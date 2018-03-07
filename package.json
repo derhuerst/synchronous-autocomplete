@@ -22,7 +22,7 @@
 		"node": ">=6"
 	},
 	"dependencies": {
-		"hifo": "^0.7.0",
+		"hifo": "^1.0.0",
 		"leven": "^2.1.0"
 	},
 	"devDependencies": {
