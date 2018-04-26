@@ -6,6 +6,7 @@ const leven = require('leven')
 const sortBy = require('lodash.sortby')
 
 const create = require('.')
+const build = require('./build')
 
 const tokens = { // items by token
 	one: [0],
@@ -116,6 +117,21 @@ test('autocomplete exposes the internal ID', (t) => {
 	t.equal(r1[autocomplete.internalId], 1)
 	const desc1 = Object.getOwnPropertyDescriptor(r1, autocomplete.internalId)
 	t.equal(desc1.enumerable, false)
+})
+
+test('build takes duplicate tokens into account', (t) => {
+	const {tokens, nrOfTokens} = build(tokenize, [
+		{id: 'A', name: 'foo bar foo', weight: 10}, // "foo" twice
+		{id: 'B', name: 'foo baz', weight: 10}
+	])
+
+	t.deepEqual(tokens, {
+		foo: [0, 0, 1],
+		bar: [0],
+		baz: [1]
+	})
+	t.deepEqual(nrOfTokens, [3, 2])
+	t.end()
 })
 
 test('autocomplete takes duplicate tokens into account', (t) => {

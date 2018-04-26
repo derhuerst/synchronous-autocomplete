@@ -19,8 +19,8 @@ const buildIndexes = (tokenize, items) => {
 		const id = generateId(item.id)
 		const tokensOfItem = tokenize(item.name)
 		for (let token of tokensOfItem) {
-			if (!Array.isArray(tokens[token])) tokens[token] = []
-			if (!tokens[token].includes(id)) tokens[token].push(id)
+			if (!Array.isArray(tokens[token])) tokens[token] = [id]
+			else tokens[token].push(id)
 		}
 
 		weights[id] = item.weight
