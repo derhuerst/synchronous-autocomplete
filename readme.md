@@ -83,9 +83,23 @@ const originalIds = [
 ]
 ```
 
+As the last step, we must define a function that normalizes search input into a list of *fragments*. Consider using this simple function:
+
+```js
+const normalize = require('normalize-for-search')
+
+const tokenize = (str) => {
+	return normalize(str).replace(/[^\w\s]/g, '').split(/\s+/g)
+}
+```
+
 Now, we can query our index:
 
 ```js
+const create = require('synchronous-autocomplete')
+
+const autocomplete = create(tokens, scores, weights, nrOfTokens, originalIds, tokenize)
+
 autocomplete('bana')
 // [ {
 //	id: 'banana',
