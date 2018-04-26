@@ -38,12 +38,12 @@ const items = [ {
 
 Let's understand the terminology used by this tool:
 
-- *item*: A thing to search for. In our example, apple, banana and pomegranate are tree *items*.
+- *item*: A thing to search for. In our example, apple, banana and pomegranate each are an *item*.
 - *weight*: How important an *item* is.
-- *token*: A word from the fully processed search query. For example, to find an item named `Hey There!`, you may process its name into the *tokens* `hey` & `there`.
-- *fragment*: A word from the process search query, which may partially match a token. E.g. the *fragment* `ther` (from the search query `Hey Ther`) partially matches the *token* `there`.
-- *relevance*: How well an item is matched by the search query.
-- *score*: A combination of an item's *weight* and *relevance*. Use it to sort search results.
+- *token*: A word from the fully normalized item name. For example, to find an item named `Hey There!`, you may process its name into the *tokens* `hey` & `there`.
+- *fragment*: A word from the normalized search query, which may partially match a *token*. E.g. the *fragment* `ther` (from the search query `Hey Ther`) partially matches the *token* `there`.
+- *relevance*: How well an item fits to the search query.
+- *score*: A combination of an item's *weight* and *relevance*. Used to rank search results.
 
 In order to be as fast and disk-space-efficient as possible, `synchronous-autocomplete` requires five indexes to be prebuilt from the list of items. Check [the example code](example.js) for more details on how to build them. For our example, they would look like this:
 
