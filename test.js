@@ -117,3 +117,31 @@ test('autocomplete exposes the internal ID', (t) => {
 	const desc1 = Object.getOwnPropertyDescriptor(r1, autocomplete.internalId)
 	t.equal(desc1.enumerable, false)
 })
+
+test('autocomplete takes duplicate tokens into account', (t) => {
+	// For the query "foo ba", B should rank higher, except if the duplicate
+	// token "foo" in A is taken into account. We assert this.
+	// A: foo bar foo
+	// B: foo baz
+	const tokens = { // items by token
+		foo: [0, 0, 1],
+		bar: [0],
+		baz: [1]
+	}
+	const scores = {
+		foo: 1,
+		bar: 1 / 2,
+		baz: 1 / 2
+	}
+	const weights = [10, 10]
+	const nrOfTokens = [3, 2]
+	const originalIds = ['A', 'B']
+
+	const a = create(tokens, scores, weights, nrOfTokens, originalIds, tokenize)
+	const [r0, r1] = a('foo ba', 2, true, false)
+
+	t.equal(r0.id, 'A')
+	t.equal(r1.id, 'B')
+	t.ok(r0.relevance > r1.relevance)
+	t.end()
+})
