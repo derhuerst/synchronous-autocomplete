@@ -7,7 +7,7 @@ const internalId = Symbol('internal numeric ID')
 
 const createAutocomplete = (tokens, scores, weights, nrOfTokens, originalIds, tokenize) => {
 	const byFragment = (fragment, completion, fuzzy) => {
-		const results = {}
+		const results = []
 		const l = fragment.length
 
 		if (tokens[fragment]) {
@@ -70,7 +70,7 @@ const createAutocomplete = (tokens, scores, weights, nrOfTokens, originalIds, to
 
 		const results = Object.create(null)
 		for (let fragment in data) {
-			for (let id in data[fragment]) {
+			for (let id = 0; id < data[fragment].length; id++) {
 				if (id in results) continue
 
 				const relevance = totalRelevance(id)
