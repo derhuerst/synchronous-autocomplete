@@ -32,21 +32,21 @@ test('byFragment finds an exact match', (t) => {
 	t.plan(1)
 	const results = autocomplete.byFragment('four', false, false)
 
-	t.deepEqual(results, {
+	t.deepEqual(results, [
 		// 1 + scores[fragment] + Math.sqrt(fragment.length)
-		'0': 1 + scores.four + 2,
-		'1': 1 + scores.four + 2
-	})
+		1 + scores.four + 2,
+		1 + scores.four + 2
+	])
 })
 
 test('byFragment finds a match by first letters', (t) => {
 	t.plan(2)
 
-	t.deepEqual(autocomplete.byFragment('fou', true, false), {
+	t.deepEqual(autocomplete.byFragment('fou', true, false), [
 		// 1 + scores[fragment] + fragmentLength / tokenLength
-		'0': 1 + scores.four + 3 / 4,
-		'1': 1 + scores.four + 3 / 4
-	})
+		1 + scores.four + 3 / 4,
+		1 + scores.four + 3 / 4
+	])
 	t.deepEqual(autocomplete.byFragment('fou', false, false), {})
 })
 
@@ -54,10 +54,9 @@ test('byFragment finds a match despite typos', (t) => {
 	t.plan(1)
 	const results = autocomplete.byFragment('there', false, true) // typo
 
-	t.deepEqual(results, {
-		// (1 + scores[fragment]) / (1 + levenshteinDistance)
-		'1': (1 + scores.three) / (1 + leven('there', 'three'))
-	})
+	// (1 + scores[fragment]) / (1 + levenshteinDistance)
+	const expected = (1 + scores.three) / (1 + leven('there', 'three'))
+	t.equal(results[1], expected)
 })
 
 test('autocomplete returns an array', (t) => {
