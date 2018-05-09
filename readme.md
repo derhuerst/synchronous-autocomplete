@@ -1,6 +1,6 @@
 # synchronous-autocomplete
 
-**Fast, simple autocompletion.** Supports [autocompletion](https://en.wikipedia.org/wiki/Autocomplete) and [Levenshtein](https://en.wikipedia.org/wiki/Levenshtein_distance)-based fuzzy search. Uses precomputed indexes to be fast.
+**Fast, simple [autocompletion](https://en.wikipedia.org/wiki/Autocomplete).** Also supports [Levenshtein](https://en.wikipedia.org/wiki/Levenshtein_distance)-based fuzzy search. Uses precomputed indexes to be fast.
 
 [![npm version](https://img.shields.io/npm/v/synchronous-autocomplete.svg)](https://www.npmjs.com/package/synchronous-autocomplete)
 [![build status](https://api.travis-ci.org/derhuerst/synchronous-autocomplete.svg?branch=master)](https://travis-ci.org/derhuerst/synchronous-autocomplete)
