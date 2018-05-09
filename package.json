@@ -6,6 +6,9 @@
 	"files": [
 		"index.js",
 		"build.js",
+		"encode.js",
+		"decode.js",
+		"schema.proto.js",
 		"src"
 	],
 	"keywords": [
@@ -23,7 +26,8 @@
 	},
 	"dependencies": {
 		"hifo": "^1.0.0",
-		"leven": "^2.1.0"
+		"leven": "^2.1.0",
+		"pbf": "^3.1.0"
 	},
 	"devDependencies": {
 		"babel-cli": "^6.26.0",
@@ -34,7 +38,9 @@
 		"tape": "^4.8.0"
 	},
 	"scripts": {
-		"build": "babel src --presets env --out-dir .",
+		"transpile": "babel src --presets env --out-dir .",
+		"pbf": "pbf src/schema.proto >src/schema.proto.js",
+		"build": "npm run pbf && npm run transpile",
 		"test": "node test.js | tap-min",
 		"prepublishOnly": "npm run build && npm test"
 	}

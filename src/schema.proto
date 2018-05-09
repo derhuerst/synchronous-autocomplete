@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+message Token {
+	string name = 1;
+	repeated int32 ids = 2;
+}
+
+message Score {
+	string token = 1;
+	float score = 2;
+}
+
+message Index {
+	repeated Token tokens = 1;
+	repeated int32 weights = 2;
+	repeated int32 nr_of_tokens = 3;
+	repeated Score scores = 4;
+	repeated string original_ids = 5;
+}
