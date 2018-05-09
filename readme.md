@@ -142,6 +142,23 @@ autocomplete(query, limit = 6, fuzzy = false, completion = true)
 - `tokenize` must be a function that, given a search query, returns an array of *fragments*.
 
 
+## Storing the index as protocol buffer
+
+[Protocol buffers](https://developers.google.com/protocol-buffers/) (a.k. *protobuf*s) are a compact binary format for structured data serialization.
+
+```js
+const encode = require('synchronous-autocomplete/encode')
+const fs = require('fs')
+
+// encode & write the index
+const encoded = encode({tokens, weights, nrOfTokens, scores, originalIds})
+fs.writeFileSync('index.pbf', encoded)
+
+// read & decode the index
+const decoded = decode(fs.readFileSync('index.pbf'))
+```
+
+
 ## Contributing
 
 If you have a question or have difficulties using `synchronous-autocomplete`, please double-check your code and setup first. If you think you have found a bug or want to propose a feature, refer to [the issues page](https://github.com/derhuerst/synchronous-autocomplete/issues).

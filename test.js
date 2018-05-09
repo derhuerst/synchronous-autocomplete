@@ -7,6 +7,8 @@ const sortBy = require('lodash.sortby')
 
 const create = require('.')
 const build = require('./build')
+const encode = require('./encode')
+const decode = require('./decode')
 
 const tokens = { // items by token
 	one: [0],
@@ -158,5 +160,18 @@ test('autocomplete takes duplicate tokens into account', (t) => {
 	t.equal(r0.id, 'A')
 	t.equal(r1.id, 'B')
 	t.ok(r0.relevance > r1.relevance)
+	t.end()
+})
+
+test('encode, decode works', (t) => {
+	const index = {tokens, scores, weights, nrOfTokens, originalIds}
+	const index2 = decode(encode(index))
+
+	t.ok(index2)
+	t.deepEqual(index2.tokens, index.tokens)
+	t.deepEqual(index2.scores, index.scores)
+	t.deepEqual(index2.weights, index.weights)
+	t.deepEqual(index2.nrOfTokens, index.nrOfTokens)
+	t.deepEqual(index2.originalIds, index.originalIds)
 	t.end()
 })
