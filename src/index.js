@@ -11,7 +11,7 @@ const createAutocomplete = (tokens, scores, weights, nrOfTokens, originalIds, to
 		const l = fragment.length
 
 		if (tokens[fragment]) {
-			const relevance = 1 + scores[fragment] + Math.sqrt(fragment.length)
+			const relevance = 1 + scores[fragment] + Math.sqrt(l)
 
 			const ids = tokens[fragment]
 			for (let i = 0; i < ids.length; i++) {
@@ -29,8 +29,8 @@ const createAutocomplete = (tokens, scores, weights, nrOfTokens, originalIds, to
 				let distance
 
 				// add-one smoothing
-				if (completion && t.length > fragment.length && fragment === t.slice(0, l)) {
-					relevance = 1 + scores[t] + fragment.length / t.length
+				if (completion && t.length > l && fragment === t.slice(0, l)) {
+					relevance = 1 + scores[t] + l / t.length
 				} else if (fuzzy && (distance = leven(fragment, t)) <= 3) {
 					relevance = (1 + scores[t]) / (distance + 1)
 				} else continue
