@@ -35,7 +35,7 @@
 		"benchmark": "^2.1.4",
 		"lodash.sortby": "^4.7.0",
 		"normalize-for-search": "^2.0.1",
-		"tap-min": "^1.2.2",
+		"tap-min": "^2.0.0",
 		"tape": "^4.8.0"
 	},
 	"scripts": {
