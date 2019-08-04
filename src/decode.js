@@ -1,12 +1,9 @@
 'use strict'
 
-const Pbf = require('pbf')
-
 const {Index} = require('./schema.proto.js')
 
 const decode = (buf) => {
-	const pbf = new Pbf(buf)
-	const output = Index.read(pbf)
+	const output = Index.decode(buf)
 
 	const index = {
 		tokens: Object.create(null),

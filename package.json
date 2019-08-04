@@ -27,7 +27,7 @@
 	"dependencies": {
 		"hifo": "^1.0.0",
 		"leven": "^3.0.0",
-		"pbf": "^3.1.0"
+		"protocol-buffers-encodings": "^1.1.0"
 	},
 	"devDependencies": {
 		"babel-cli": "^6.26.0",
@@ -35,12 +35,13 @@
 		"benchmark": "^2.1.4",
 		"lodash.sortby": "^4.7.0",
 		"normalize-for-search": "^2.0.1",
+		"protocol-buffers": "^4.1.0",
 		"tap-min": "^1.2.2",
 		"tape": "^4.8.0"
 	},
 	"scripts": {
 		"transpile": "babel src --presets env --out-dir .",
-		"pbf": "pbf src/schema.proto >src/schema.proto.js",
+		"pbf": "protocol-buffers src/schema.proto -o schema.proto.js",
 		"build": "npm run pbf && npm run transpile",
 		"test": "node test.js | tap-min",
 		"prepublishOnly": "npm run build && npm test"

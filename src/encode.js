@@ -1,7 +1,5 @@
 'use strict'
 
-const Pbf = require('pbf')
-
 const {Index} = require('./schema.proto.js')
 
 const encode = (index) => {
@@ -29,9 +27,7 @@ const encode = (index) => {
 		})
 	}
 
-	const pbf = new Pbf()
-	Index.write(input, pbf)
-	return pbf.finish()
+	return Index.encode(input)
 }
 
 module.exports = encode
