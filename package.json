@@ -37,7 +37,7 @@
 		"normalize-for-search": "^2.0.1",
 		"protocol-buffers": "^4.1.0",
 		"tap-min": "^1.2.2",
-		"tape": "^4.8.0"
+		"tape": "^5.0.0"
 	},
 	"scripts": {
 		"transpile": "babel src --presets env --out-dir .",
