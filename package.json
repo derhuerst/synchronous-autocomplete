@@ -1,49 +1,53 @@
 {
-	"name": "synchronous-autocomplete",
-	"description": "Fast, simple autocompletion.",
-	"version": "2.3.0",
-	"main": "index.js",
-	"files": [
-		"index.js",
-		"build.js",
-		"encode.js",
-		"decode.js",
-		"schema.proto.js",
-		"src"
-	],
-	"keywords": [
-		"autocomplete",
-		"autocompletion",
-		"search"
-	],
-	"author": "Jannis R <mail@jannisr.de>",
-	"homepage": "https://github.com/derhuerst/synchronous-autocomplete",
-	"repository": "derhuerst/synchronous-autocomplete",
-	"bugs": "https://github.com/derhuerst/synchronous-autocomplete/issues",
-	"license": "ISC",
-	"engines": {
-		"node": ">=6"
-	},
-	"dependencies": {
-		"hifo": "^1.0.0",
-		"leven": "^3.0.0",
-		"protocol-buffers-encodings": "^1.1.0"
-	},
-	"devDependencies": {
-		"babel-cli": "^6.26.0",
-		"babel-preset-env": "^1.6.1",
-		"benchmark": "^2.1.4",
-		"lodash.sortby": "^4.7.0",
-		"normalize-for-search": "^2.0.1",
-		"protocol-buffers": "^4.1.0",
-		"tap-min": "^1.2.2",
-		"tape": "^5.0.0"
-	},
-	"scripts": {
-		"transpile": "babel src --presets env --out-dir .",
-		"pbf": "protocol-buffers src/schema.proto -o schema.proto.js",
-		"build": "npm run pbf && npm run transpile",
-		"test": "node test.js | tap-min",
-		"prepublishOnly": "npm run build && npm test"
-	}
+  "name": "synchronous-autocomplete",
+  "description": "Fast, simple autocompletion.",
+  "version": "2.3.0",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "build.js",
+    "encode.js",
+    "decode.js",
+    "schema.proto.js",
+    "src"
+  ],
+  "keywords": [
+    "autocomplete",
+    "autocompletion",
+    "search"
+  ],
+  "author": "Jannis R <mail@jannisr.de>",
+  "homepage": "https://github.com/derhuerst/synchronous-autocomplete",
+  "repository": "derhuerst/synchronous-autocomplete",
+  "bugs": "https://github.com/derhuerst/synchronous-autocomplete/issues",
+  "license": "ISC",
+  "engines": {
+    "node": ">=6"
+  },
+  "dependencies": {
+    "hifo": "^1.0.0",
+    "leven": "^3.0.0",
+    "protocol-buffers-encodings": "^1.1.0",
+    "snyk": "^1.320.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "benchmark": "^2.1.4",
+    "lodash.sortby": "^4.7.0",
+    "normalize-for-search": "^2.0.1",
+    "protocol-buffers": "^4.1.0",
+    "tap-min": "^1.2.2",
+    "tape": "^5.0.0"
+  },
+  "scripts": {
+    "transpile": "babel src --presets env --out-dir .",
+    "pbf": "protocol-buffers src/schema.proto -o schema.proto.js",
+    "build": "npm run pbf && npm run transpile",
+    "test": "node test.js | tap-min",
+    "prepublishOnly": "npm run build && npm test",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "snyk": true
 }
