@@ -31,6 +31,7 @@
 	},
 	"devDependencies": {
 		"benchmark": "^2.1.4",
+		"eslint": "^8.23.1",
 		"lodash.sortby": "^4.7.0",
 		"normalize-for-search": "^2.0.1",
 		"protocol-buffers": "^4.1.0",
@@ -39,7 +40,8 @@
 	},
 	"scripts": {
 		"build": "protocol-buffers lib/schema.proto -o lib/schema.proto.cjs",
+		"lint": "eslint .",
 		"test": "node test.js | tap-min",
-		"prepublishOnly": "npm run build && npm test"
+		"prepublishOnly": "npm run build && npm run lint && npm test"
 	}
 }
