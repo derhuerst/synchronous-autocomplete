@@ -1,0 +1,2 @@
+13k VBB stations, "friedrich", 3 results, completion x 389 ops/sec ±0.35% (95 runs sampled)
+index decoding x 133 ops/sec ±0.82% (77 runs sampled)

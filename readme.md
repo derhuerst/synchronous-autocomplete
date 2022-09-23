@@ -109,27 +109,30 @@ const autocomplete = createAutocomplete(index, tokenize)
 
 autocomplete('bana')
 // [ {
-//	id: 'banana',
-//	relevance: 0.66667,
-//	score: 0.83995
+// 	relevance: 0.6666665555555555,
+// 	score: 0.8399472266053544,
+// 	weight: 2,
 // } ]
 
 autocomplete('sour')
 // [ {
-//	id: 'pomegranate',
-//	relevance: 1.83333,
-//	score: 3.13496
+// 	id: 'pome',
+// 	relevance: 1.8333335,
+// 	score: 3.134956187236602,
+// 	weight: 5,
 // }, {
-//	id: 'apple',
-//	relevance: 1.22222,
-//	score: 1.76275
+// 	id: 'apple',
+// 	relevance: 1.2222223333333333,
+// 	score: 1.762749635070118,
+// 	weight: 3,
 // } ]
 
 autocomplete('aplle', 3, true) // note the typo
 // [ {
-//	id: 'apple',
-//	relevance: 0.22222,
-//	score: 0.3205
+// 	id: 'apple',
+// 	relevance: 0.22222216666666667,
+// 	score: 0.3204998243877813,
+// 	weight: 3,
 // } ]
 ```
 
