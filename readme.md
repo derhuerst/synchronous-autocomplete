@@ -85,7 +85,7 @@ const originalIds = [
 As the last step, we must define a function that normalizes search input into a list of *fragments*. Consider using this simple function:
 
 ```js
-const normalize = require('normalize-for-search')
+import normalize from 'normalize-for-search'
 
 const tokenize = (str) => {
 	return normalize(str).replace(/[^\w\s]/g, '').split(/\s+/g)
@@ -95,9 +95,9 @@ const tokenize = (str) => {
 Now, we can query our index:
 
 ```js
-const create = require('synchronous-autocomplete')
+import {createAutocomplete} from 'synchronous-autocomplete'
 
-const autocomplete = create(tokens, scores, weights, nrOfTokens, originalIds, tokenize)
+const autocomplete = createAutocomplete(tokens, scores, weights, nrOfTokens, originalIds, tokenize)
 
 autocomplete('bana')
 // [ {
@@ -129,7 +129,7 @@ autocomplete('aplle', 3, true) // note the typo
 ## API
 
 ```js
-const autocomplete = create(tokens, scores, weights, nrOfTokens, originalIds, tokenize)
+const autocomplete = createAutocomplete(tokens, scores, weights, nrOfTokens, originalIds, tokenize)
 autocomplete(query, limit = 6, fuzzy = false, completion = true)
 ```
 
@@ -146,15 +146,16 @@ autocomplete(query, limit = 6, fuzzy = false, completion = true)
 [Protocol buffers](https://developers.google.com/protocol-buffers/) (a.k. *protobuf*s) are a compact binary format for structured data serialization.
 
 ```js
-const encode = require('synchronous-autocomplete/encode')
-const fs = require('fs')
+import {encodeIndex} from 'synchronous-autocomplete/encode.js'
+import {writeFileSync, readFileSync} from 'node:fs'
 
 // encode & write the index
-const encoded = encode({tokens, weights, nrOfTokens, scores, originalIds})
-fs.writeFileSync('index.pbf', encoded)
+const index = {tokens, scores, weights, nrOfTokens, originalIds}
+const encoded = encodeIndex(index)
+writeFileSync('index.pbf', encoded)
 
 // read & decode the index
-const decoded = decode(fs.readFileSync('index.pbf'))
+const decoded = decode(readFileSync('index.pbf'))
 ```
 
 

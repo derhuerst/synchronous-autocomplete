@@ -1,9 +1,7 @@
-'use strict'
+import normalize from 'normalize-for-search'
 
-const normalize = require('normalize-for-search')
-
-const build = require('./build')
-const create = require('.')
+import {buildIndex} from './build.js'
+import {createAutocomplete} from './index.js'
 
 const tokenize = str => normalize(str).replace(/[^\w\s]/g, '').split(/\s+/g)
 
@@ -21,9 +19,9 @@ const items = [ {
 	weight: 5
 } ]
 
-const {tokens, scores, weights, nrOfTokens, originalIds} = build(tokenize, items)
+const {tokens, scores, weights, nrOfTokens, originalIds} = buildIndex(tokenize, items)
 
-const autocomplete = create(tokens, scores, weights, nrOfTokens, originalIds, tokenize)
+const autocomplete = createAutocomplete(tokens, scores, weights, nrOfTokens, originalIds, tokenize)
 console.log(autocomplete('bana'))
 console.log(autocomplete('sour'))
 console.log(autocomplete('aplle', 3, true)) // note the typo

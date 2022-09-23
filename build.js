@@ -1,8 +1,6 @@
-'use strict'
-
 const roundTo = (v, p) => parseFloat(v.toFixed(p))
 
-const buildIndexes = (tokenize, items) => {
+const buildIndex = (tokenize, items) => {
 	const originalIds = []
 	const tokens = Object.create(null)
 	const weights = []
@@ -37,4 +35,6 @@ const buildIndexes = (tokenize, items) => {
 	return {tokens, scores, weights, nrOfTokens, originalIds}
 }
 
-module.exports = buildIndexes
+export {
+	buildIndex,
+}

@@ -1,14 +1,12 @@
-'use strict'
+import normalize from 'normalize-for-search'
+import {test} from 'tape'
+import leven from 'leven'
+import sortBy from 'lodash.sortby'
 
-const normalize = require('normalize-for-search')
-const test = require('tape')
-const leven = require('leven')
-const sortBy = require('lodash.sortby')
-
-const create = require('.')
-const build = require('./build')
-const encode = require('./encode')
-const decode = require('./decode')
+import {createAutocomplete as create} from './index.js'
+import {buildIndex as build} from './build.js'
+import {encodeIndex as encode} from './encode.js'
+import {decodeIndex as decode} from './decode.js'
 
 const tokens = { // items by token
 	one: [0],

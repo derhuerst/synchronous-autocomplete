@@ -1,7 +1,5 @@
-'use strict'
-
-const hifo = require('hifo')
-const leven = require('leven')
+import hifo from 'hifo'
+import leven from 'leven'
 
 const internalId = Symbol('internal numeric ID')
 
@@ -96,4 +94,7 @@ const createAutocomplete = (tokens, scores, weights, nrOfTokens, originalIds, to
 	return autocomplete
 }
 
-module.exports = createAutocomplete
+export {
+	internalId,
+	createAutocomplete,
+}

@@ -1,8 +1,7 @@
-'use strict'
+import * as IndexSchema from './lib/schema.proto.cjs'
+const {Index} = IndexSchema
 
-const {Index} = require('./schema.proto.js')
-
-const decode = (buf) => {
+const decodeIndex = (buf) => {
 	const output = Index.decode(buf)
 
 	const index = {
@@ -24,4 +23,6 @@ const decode = (buf) => {
 	return index
 }
 
-module.exports = decode
+export {
+	decodeIndex,
+}

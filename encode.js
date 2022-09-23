@@ -1,8 +1,9 @@
-'use strict'
+import * as IndexSchema from './lib/schema.proto.cjs'
+const {Index} = IndexSchema
 
-const {Index} = require('./schema.proto.js')
+// todo: move into index.js?
 
-const encode = (index) => {
+const encodeIndex = (index) => {
 	const input = {
 		tokens: [],
 		weights: index.weights,
@@ -30,4 +31,6 @@ const encode = (index) => {
 	return Index.encode(input)
 }
 
-module.exports = encode
+export {
+	encodeIndex,
+}

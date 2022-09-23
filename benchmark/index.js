@@ -1,13 +1,18 @@
 'use strict'
 
-const normalize = require('normalize-for-search')
-const {Suite} = require('benchmark')
+import normalize from 'normalize-for-search'
+import benchmark from 'benchmark'
 
-const build = require('../build')
-const data = require('./data.json') // 13k stations
-const encode = require('../encode')
-const create = require('..')
-const decode = require('../decode')
+import {buildIndex as build} from '../build.js'
+import {encodeIndex as encode} from '../encode.js'
+import {createAutocomplete as create} from '../index.js'
+import {decodeIndex as decode} from '../decode.js'
+
+// todo: use import assertions once they're supported by Node.js & ESLint
+// https://github.com/tc39/proposal-import-assertions
+import {createRequire} from 'module'
+const require = createRequire(import.meta.url)
+const data = require('./data.json') // 13k station
 
 const tokenize = str => normalize(str).replace(/[^\w\s]/g, '').split(/\s+/g)
 
@@ -17,7 +22,7 @@ const encodedIndex = encode(index)
 const {tokens, scores, weights, nrOfTokens, originalIds} = index
 const autocomplete = create(tokens, scores, weights, nrOfTokens, originalIds, tokenize)
 
-new Suite()
+new benchmark.Suite()
 
 .add('13k VBB stations, "friedrich", 3 results, completion', () => {
 	autocomplete('friedrich', 3, false, true)
