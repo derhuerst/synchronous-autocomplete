@@ -49,7 +49,7 @@ test('byFragment finds a match by first letters', (t) => {
 		1 + scores.four + 3 / 4,
 		1 + scores.four + 3 / 4
 	])
-	t.deepEqual(autocomplete.byFragment('fou', false, false), {})
+	t.deepEqual(autocomplete.byFragment('fou', false, false), [])
 })
 
 test('byFragment finds a match despite typos', (t) => {
@@ -126,11 +126,11 @@ test('build takes duplicate tokens into account', (t) => {
 		{id: 'B', name: 'foo baz', weight: 10}
 	])
 
-	t.deepEqual(tokens, {
+	t.deepEqual(tokens, Object.assign(Object.create(null), {
 		foo: [0, 0, 1],
 		bar: [0],
 		baz: [1]
-	})
+	}))
 	t.deepEqual(nrOfTokens, [3, 2])
 	t.end()
 })
@@ -168,8 +168,8 @@ test('encode, decode works', (t) => {
 	const index2 = decode(encode(index))
 
 	t.ok(index2)
-	t.deepEqual(index2.tokens, index.tokens)
-	t.deepEqual(index2.scores, index.scores)
+	t.deepEqual(index2.tokens, Object.assign(Object.create(null), index.tokens))
+	t.deepEqual(index2.scores, Object.assign(Object.create(null), index.scores))
 	t.deepEqual(index2.weights, index.weights)
 	t.deepEqual(index2.nrOfTokens, index.nrOfTokens)
 	t.deepEqual(index2.originalIds, index.originalIds)
