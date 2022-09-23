@@ -3,7 +3,6 @@
 **Fast, simple [autocompletion](https://en.wikipedia.org/wiki/Autocomplete).** Also supports [Levenshtein](https://en.wikipedia.org/wiki/Levenshtein_distance)-based fuzzy search. Uses precomputed indexes to be fast.
 
 [![npm version](https://img.shields.io/npm/v/synchronous-autocomplete.svg)](https://www.npmjs.com/package/synchronous-autocomplete)
-[![build status](https://api.travis-ci.org/derhuerst/synchronous-autocomplete.svg?branch=master)](https://travis-ci.org/derhuerst/synchronous-autocomplete)
 ![ISC-licensed](https://img.shields.io/github/license/derhuerst/synchronous-autocomplete.svg)
 [![support me via GitHub Sponsors](https://img.shields.io/badge/support%20me-donate-fa7664.svg)](https://github.com/sponsors/derhuerst)
 [![chat with me on Twitter](https://img.shields.io/badge/chat%20with%20me-on%20Twitter-1da1f2.svg)](https://twitter.com/derhuerst)
