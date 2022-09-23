@@ -82,7 +82,7 @@ const originalIds = [
 ]
 ```
 
-As the last step, we must define a function that normalizes search input into a list of *fragments*. Consider using this simple function:
+Next, we must define a function that normalizes search input into a list of *fragments*. Consider using this simple function:
 
 ```js
 import normalize from 'normalize-for-search'
@@ -92,11 +92,20 @@ const tokenize = (str) => {
 }
 ```
 
+Of course, you don't have to calculate the tokens & scores! Instead, use `buildIndex` to generate the data:
+
+```js
+import {buildIndex} from 'synchronous-autocomplete/build.js'
+
+const index = buildIndex(tokenize, items)
+```
+
 Now, we can query our index:
 
 ```js
 import {createAutocomplete} from 'synchronous-autocomplete'
 
+const {tokens, scores, weights, nrOfTokens, originalIds} = index
 const autocomplete = createAutocomplete(tokens, scores, weights, nrOfTokens, originalIds, tokenize)
 
 autocomplete('bana')
@@ -129,6 +138,14 @@ autocomplete('aplle', 3, true) // note the typo
 ## API
 
 ```js
+const index = buildIndex(tokenize, items)
+const {tokens, scores, weights, nrOfTokens, originalIds} = index
+```
+
+- `tokenize` must be a function that, given a search query, returns an array of *fragments*.
+- `items` must be an array of objects, each with `id`, `name` & `weight`.
+
+```js
 const autocomplete = createAutocomplete(tokens, scores, weights, nrOfTokens, originalIds, tokenize)
 autocomplete(query, limit = 6, fuzzy = false, completion = true)
 ```
@@ -138,7 +155,7 @@ autocomplete(query, limit = 6, fuzzy = false, completion = true)
 - `weights` must be an array with an *item* weight per internal *item* ID.
 - `nrOfTokens` must be an array with the number of *tokens* per internal *item* ID.
 - `originalIds` must be an array with the (real) *item* ID per internal *item* ID.
-- `tokenize` must be a function that, given a search query, returns an array of *fragments*.
+- `tokenize` is the same as with `buildIndex()`.
 
 
 ## Storing the index as protocol buffer
@@ -150,7 +167,6 @@ import {encodeIndex} from 'synchronous-autocomplete/encode.js'
 import {writeFileSync, readFileSync} from 'node:fs'
 
 // encode & write the index
-const index = {tokens, scores, weights, nrOfTokens, originalIds}
 const encoded = encodeIndex(index)
 writeFileSync('index.pbf', encoded)
 
