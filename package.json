@@ -26,7 +26,7 @@
 	},
 	"dependencies": {
 		"hifo": "^1.0.0",
-		"leven": "^3.0.0",
+		"leven": "^4.0.0",
 		"protocol-buffers-encodings": "^1.1.0"
 	},
 	"devDependencies": {
@@ -34,8 +34,8 @@
 		"eslint": "^8.23.1",
 		"lodash.sortby": "^4.7.0",
 		"normalize-for-search": "^2.0.1",
-		"protocol-buffers": "^4.1.0",
-		"tap-min": "^1.2.2",
+		"protocol-buffers": "^5.0.0",
+		"tap-min": "^2.0.0",
 		"tape": "^5.0.0"
 	},
 	"scripts": {
