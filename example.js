@@ -19,9 +19,9 @@ const items = [ {
 	weight: 5
 } ]
 
-const {tokens, scores, weights, nrOfTokens, originalIds} = buildIndex(tokenize, items)
+const index = buildIndex(tokenize, items)
 
-const autocomplete = createAutocomplete(tokens, scores, weights, nrOfTokens, originalIds, tokenize)
+const autocomplete = createAutocomplete(index, tokenize)
 console.log(autocomplete('bana'))
 console.log(autocomplete('sour'))
 console.log(autocomplete('aplle', 3, true)) // note the typo

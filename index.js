@@ -1,9 +1,23 @@
+import {ok} from 'node:assert'
 import hifo from 'hifo'
 import leven from 'leven'
 
 const internalId = Symbol('internal numeric ID')
 
-const createAutocomplete = (tokens, scores, weights, nrOfTokens, originalIds, tokenize) => {
+const createAutocomplete = (index, tokenize) => {
+	const {
+		tokens,
+		scores,
+		weights,
+		nrOfTokens,
+		originalIds,
+	} = index
+	ok(tokens && typeof tokens === 'object', 'tokens must be an object')
+	ok(scores && typeof scores === 'object', 'scores must be an object')
+	ok(Array.isArray(weights), 'weights must be an array')
+	ok(Array.isArray(nrOfTokens), 'nrOfTokens must be an array')
+	ok(Array.isArray(originalIds), 'originalIds must be an array')
+
 	const byFragment = (fragment, completion, fuzzy) => {
 		const results = []
 		const l = fragment.length

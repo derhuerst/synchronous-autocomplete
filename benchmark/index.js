@@ -19,8 +19,7 @@ const tokenize = str => normalize(str).replace(/[^\w\s]/g, '').split(/\s+/g)
 const index = build(tokenize, data)
 const encodedIndex = encode(index)
 
-const {tokens, scores, weights, nrOfTokens, originalIds} = index
-const autocomplete = create(tokens, scores, weights, nrOfTokens, originalIds, tokenize)
+const autocomplete = create(index, tokenize)
 
 new benchmark.Suite()
 

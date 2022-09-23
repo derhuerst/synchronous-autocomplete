@@ -105,8 +105,7 @@ Now, we can query our index:
 ```js
 import {createAutocomplete} from 'synchronous-autocomplete'
 
-const {tokens, scores, weights, nrOfTokens, originalIds} = index
-const autocomplete = createAutocomplete(tokens, scores, weights, nrOfTokens, originalIds, tokenize)
+const autocomplete = createAutocomplete(index, tokenize)
 
 autocomplete('bana')
 // [ {
@@ -146,7 +145,7 @@ const {tokens, scores, weights, nrOfTokens, originalIds} = index
 - `items` must be an array of objects, each with `id`, `name` & `weight`.
 
 ```js
-const autocomplete = createAutocomplete(tokens, scores, weights, nrOfTokens, originalIds, tokenize)
+const autocomplete = createAutocomplete(index, tokenize)
 autocomplete(query, limit = 6, fuzzy = false, completion = true)
 ```
 

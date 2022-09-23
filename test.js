@@ -26,7 +26,7 @@ const originalIds = ['A', 'B']
 
 const tokenize = str => normalize(str).split(/\s+/g)
 
-const autocomplete = create(tokens, scores, weights, nrOfTokens, originalIds, tokenize)
+const autocomplete = create({tokens, scores, weights, nrOfTokens, originalIds}, tokenize)
 
 test('byFragment finds an exact match', (t) => {
 	t.plan(1)
@@ -152,7 +152,7 @@ test('autocomplete takes duplicate tokens into account', (t) => {
 	const nrOfTokens = [3, 2]
 	const originalIds = ['A', 'B']
 
-	const a = create(tokens, scores, weights, nrOfTokens, originalIds, tokenize)
+	const a = create({tokens, scores, weights, nrOfTokens, originalIds}, tokenize)
 	const [r0, r1] = a('foo ba', 2, true, false)
 
 	t.equal(r0.id, 'A')
